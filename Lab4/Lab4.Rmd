@@ -1,0 +1,22 @@
+---
+title: "Assignment 4 STAT40700 19205824"
+author:
+- Ryan Jennings
+output: pdf_document
+fontsize: 12pt
+---
+
+## Prepare for analysis
+```{r echo=TRUE}
+library(TSA)
+library(forecast)
+library(tseries)
+```
+
+## Exercise 1
+
+```{r echo=TRUE}
+data(prescrip)
+tsdisplay(prescrip)
+adf.test(prescrip, alternative="stationary", k=0)
+```
