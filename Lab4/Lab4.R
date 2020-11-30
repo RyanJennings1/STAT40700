@@ -43,9 +43,23 @@ exercise2 <- function() {
   tsdisplay(beersales)
 
   # b
-
+  TC = ma(beersales, 12)
+  tsdisplay(beersales - TC)
+  tsdisplay(TC)
 
   # c
+  decomp = decompose(beersales, type="additive")
+  decomp_trend = decomp$trend
+  decomp_seasonal = decomp$seasonal
+  decomp_random = decomp$random
+  plot(decomp)
 }
 
-exercise2()
+exercise3 <- function() {
+  print(data(google))
+
+  # a
+  tsdisplay(google)
+}
+
+exercise3()
