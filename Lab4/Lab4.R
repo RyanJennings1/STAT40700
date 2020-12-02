@@ -8,6 +8,7 @@ library(forecast)
 library(tseries)
 library(urca)
 library(fGarch)
+library(lmtest)
 
 exercise1 <- function() {
   # a
@@ -75,25 +76,29 @@ exercise3 <- function() {
   # c
   fit1 = garchFit(~arma(0, 0) + garch(1, 0), google, include.mean=F)
   summary(fit1)
-  #Box.test((fit1@residuals/fit1@sigma.t)^2, lag=10, t='Ljung')
+  print("-----------------------------------------------------------")
   print("-----------------------------------------------------------")
   fit2 = garchFit(~arma(0, 0) + garch(1, 1), google, include.mean=F)
   summary(fit2)
   print("-----------------------------------------------------------")
+  print("-----------------------------------------------------------")
   fit3 = garchFit(~arma(0, 0) + garch(2, 1), google, include.mean=F)
   summary(fit3)
   print("-----------------------------------------------------------")
+  print("-----------------------------------------------------------")
   fit4 = garchFit(~arma(0, 0) + garch(2, 2), google, include.mean=F)
   summary(fit4)
+  print("-----------------------------------------------------------")
+  print("-----------------------------------------------------------")
 
   # d
-  #par(mfrow=c(2, 1))
-  #plot(fit2@sigma.t^2, type='l', ylab='Conditional Variances', xlab='Time', main='Google Conditional Variances')
-  #plot(google, main='Google Time Series')
+  par(mfrow=c(2, 1))
+  plot(fit2@sigma.t^2, type='l', ylab='Conditional Variances', xlab='Time', main='Google Conditional Variances')
+  plot(google, main='Google Time Series')
 
-  #par(mfrow=c(2, 1))
-  #plot(fit2@residuals/fit2@sigma.t, type='h', ylab='Standard Residuals', xlab='Time', main='Google ACF Plot for Standard Residuals')
-  #acf((fit2@residuals/fit2@sigma.t)^2, main='ACF Plot for Squared Residuals')
+  par(mfrow=c(2, 1))
+  plot(fit2@residuals/fit2@sigma.t, type='h', ylab='Standard Residuals', xlab='Time', main='Google ACF Plot for Standard Residuals')
+  acf((fit2@residuals/fit2@sigma.t)^2, main='ACF Plot for Squared Residuals')
 }
 
 exercise3()
